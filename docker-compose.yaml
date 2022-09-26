@@ -19,13 +19,38 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: rootroot
-      MYSQL_DATABASE: appDB
-      MYSQL_USER: user 
-      MYSQL_PASSWORD: password
+#      MYSQL_DATABASE: appDB
+#      MYSQL_USER: user 
+#      MYSQL_PASSWORD: password
     volumes:
       - ./databases:/docker-entrypoint-initdb.d
       - databases:/var/lib/mysql
     container_name: mysql
+
+  svgdraw:
+    image: php:7.2-apache
+    ports:
+      - 82:80
+    volumes:
+      - ./svgdraw:/var/www/html
+    container_name: Svgdraw
+  
+  sort:
+    image: php:7.2-apache
+    ports:
+      - 83:80
+    volumes:
+      - ./sort:/var/www/html
+    container_name: Sort
+  
+  admin:
+    image: php:7.2-apache
+    ports:
+      - 84:80
+    volumes:
+      - ./admin:/var/www/html
+    container_name: Admin
+
 
 volumes:
   databases:
